@@ -16,29 +16,36 @@ public class Program {
 	
 	private static Scanner input = new Scanner(System.in);
 	private static String cep;
-	private static String webservice;
 	private static Location location;
 
 	public static void main(String[] args) {
-		buscaCEP();
-		getCEPInfo();
+		
+		boolean sair = false;
+		
+		while(!sair) {
+			System.out.print("Digite o CEP (SAIR = X): ");
+			cep = input.nextLine();
+			if(cep.equalsIgnoreCase("x")) return;
+			buscaCEP(cep);
+			getCEPInfo();
+		}
+		
+		
 	}
 	
 	public static void getCEPInfo() {
-		System.out.println();
 		System.out.println("Informações do CEP buscado:");
 		System.out.printf("Logradouro: %s \n", location.getLogradouro());
 		System.out.printf("Bairro: %s \n", location.getBairro());
 		System.out.printf("Localidade: %s \n", location.getLocalidade());
 		System.out.printf("UF: %s \n", location.getUf());
+		System.out.println();
 	}
 	
-	public static void buscaCEP() {
-		System.out.print("Digite o CEP: ");
-		cep = input.nextLine();
+	public static void buscaCEP(String cep) {
 		System.out.println("CEP BUSCADO: "+ cep);
 
-		webservice = "https://viacep.com.br/ws/" + cep + "/json";
+		String webservice = "https://viacep.com.br/ws/" + cep + "/json";
 
 		try {
 			HttpRequest request = HttpRequest.newBuilder()
