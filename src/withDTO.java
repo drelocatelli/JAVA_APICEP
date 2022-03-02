@@ -20,12 +20,10 @@ public class Program {
 
 	public static void main(String[] args) {
 		
-		boolean sair = false;
-		
-		while(!sair) {
+		while(true) {
 			System.out.print("Digite o CEP (SAIR = X): ");
 			cep = input.nextLine();
-			if(cep.equalsIgnoreCase("x")) return;
+			if(cep.equalsIgnoreCase("x")) break;
 			buscaCEP(cep);
 			getCEPInfo();
 		}
